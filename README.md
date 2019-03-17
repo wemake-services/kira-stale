@@ -7,12 +7,48 @@
 
 Automate routine work with stale GitLab issues and merge requests.
 
-Part of the [`@kira`](https://github.com/wemake-services/kira) bot family.
+Part of the [`@kira`](https://github.com/wemake-services/kira) bots family.
+
+
+## Adding new actions
+
+Policy:
+1. All actions must be idempotent: multiple runs – the same state
+2. All actions must make sense for all projects
 
 
 ## Installation
 
 We use `gitlab-triage` inside.
-So, consult [their docs](https://gitlab.com/gitlab-org/gitlab-triage) about deployment and usage.
+So, consult [their docs](https://gitlab.com/gitlab-org/gitlab-triage)
+about deployment and usage.
+
+You can even have a look at [GitLab's internal policies](https://gitlab.com/gitlab-org/quality/triage-ops/blob/master/policies).
 
 It is possible to use this setup with `.gitlab-ci.yml` and Heroku.
+
+### Labels setup
+
+You will need to create this set of labels:
+- `deadline:soft`
+- `deadline:hard`
+- `deadline:missed`
+- `validation:labels`
+- `validation:stale`
+- `notification:first`
+- `notification:last`
+
+### Heroku setup
+
+To setup a new Heroku server you will need to:
+1. Setup a [scheduler](https://elements.heroku.com/addons/scheduler)
+2. Setup all env vars with tokens and ids
+3. Enjoy!
+
+Use this command to run inside a scheduler:
+
+```bash
+bundle exec gitlab-triage \
+  --source="$KIRA_STALE_SOURCE" --source-id="$KIRA_STALE_SOURCE_ID" \
+  --token="$KIRA_GITLAB_PERSONAL_TOKEN" --host-url="$GITLAB_URL"
+```

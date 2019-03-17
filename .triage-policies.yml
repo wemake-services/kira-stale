@@ -1,1 +1,124 @@
 ---
+
+# Here we define rules about our issue and merge requests triange.
+# See https://gitlab.com/gitlab-org/gitlab-triage
+
+resource_rules:
+  issues:
+    rules:
+
+      # Stale issues:
+
+      - name: Comment stale issues
+        conditions:
+          date:
+            attribute: updated_at
+            condition: older_than
+            interval_type: days
+            interval: 80
+          forbidden_labels:
+            - "validation:stale"
+          state: opened
+        actions:
+          labels:
+            - "validation:stale"
+          comment: |
+            This issue has been open for too long (since {{updated_at}}).
+            And is still not resolved. Maybe no one needs it?
+            It would be closed in 10 days automatically.
+
+            In case you really need this issue,
+            tell me so by writing "This is still on scope".
+            And remove ~"validation:stale" label.
+
+            In case it is ok to be closed, just do not touch it.
+            And it will be automatically closed. Or close it right way.
+
+            Thanks!
+
+            CC {{author}} {{assignees}}
+      - name: Close stale issues
+        conditions:
+          date:
+            attribute: updated_at
+            condition: older_than
+            interval_type: days
+            interval: 10
+          labels:
+            - "validation:stale"
+          state: opened
+        actions:
+          status: close
+          remove_labels:
+            - "validation:stale"
+          comment: |
+            Closed as stale.
+
+      # Validation:
+
+      - name: Validate that all issues have labels
+        conditions:
+          ruby: DateTime.now >= resource["created_at"]
+          labels:
+            - No label
+          state: opened
+        actions:
+          labels:
+            - "validation:labels"
+          comment: |
+            This issue is unlabeled.
+            Please, clarify it. CC {{author}}
+
+            Steps to clarify it.
+            1. Add proper label to it
+            2. Remove ~"validation:labels" label
+
+      # Deadlines:
+
+      - name: Midly comment deadlines
+        conditions:
+          ruby: DateTime.now + 7 >= resource["due_date"]
+          forbidden_labels:
+            - "deadline:soft"
+            - "deadline:hard"
+            - "deadline:miss"
+          state: opened
+        actions:
+          labels:
+            - "deadline:soft"
+          comment: |
+            The issue's deadline is comming. Better resolve it.
+            CC {{author}} {{assignees}}
+      - name: Strongly comment deadlines
+        conditions:
+          ruby: DateTime.now + 3 >= resource["due_date"]
+          forbidden_labels:
+            - "deadline:hard"
+            - "deadline:miss"
+          state: opened
+        actions:
+          labels:
+            - "deadline:hard"
+          remove_labels:
+            - "deadline:soft"
+          comment: |
+            This issue is now on fire! :fire: Quick actions are required.
+            Global ping for all! {{author}} {{assignees}}
+      - name: Sadly comment missed deadlines
+        conditions:
+          ruby: DateTime.now >= resource["due_date"]
+          forbidden_labels:
+            - "deadline:miss"
+          state: opened
+        actions:
+          labels:
+            - "deadline:miss"
+          remove_labels:
+            - "deadline:hard"
+            - "deadline:soft"
+          comment: |
+            The deadline was missed. Shame on you, architect.
+            This incident will be reported to the stakeholders.
+            Status of this task needs to be discussed further.
+            Most likely, it still makes sence to finish it,
+            but it might be already useless.
