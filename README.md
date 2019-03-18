@@ -15,6 +15,7 @@ Part of the [`@kira`](https://github.com/wemake-services/kira) bots family.
 Policy:
 1. All actions must be idempotent: multiple runs – the same state
 2. All actions must make sense for all projects
+3. Dry run your script several times with `--dry-run` flag to make sure it works
 
 
 ## Installation
@@ -52,3 +53,9 @@ bundle exec gitlab-triage \
   --source="$KIRA_STALE_SOURCE" --source-id="$KIRA_STALE_SOURCE_ID" \
   --token="$KIRA_GITLAB_PERSONAL_TOKEN" --host-url="$GITLAB_URL"
 ```
+
+### GitLab CI setup
+
+You can generate `.gitlab-ci.yml` file to run this script as scheduled events:
+1. Use `--init-ci` to generate default `.gitlab-ci.yml` file
+2. Enable [scheduled builds in CI](https://docs.gitlab.com/ee/user/project/pipelines/schedules.html)
