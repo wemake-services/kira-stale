@@ -47,6 +47,7 @@ To setup a new Heroku server you will need to:
 3. Enjoy!
 
 Use `worker` process type to run inside a scheduler every 10 minutes.
+Make sure to fill all env vars with the correct values.
 
 
 ### GitLab CI setup

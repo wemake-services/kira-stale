@@ -77,7 +77,8 @@ resource_rules:
 
       - name: Midly comment deadlines
         conditions:
-          ruby: DateTime.now + 7 >= resource["due_date"]
+          ruby: |
+            resource["due_date"] and DateTime.now + 7 >= resource["due_date"]
           forbidden_labels:
             - "deadline:soft"
             - "deadline:hard"
@@ -91,7 +92,8 @@ resource_rules:
             CC {{author}} {{assignees}}
       - name: Strongly comment deadlines
         conditions:
-          ruby: DateTime.now + 3 >= resource["due_date"]
+          ruby: |
+            resource["due_date"] and DateTime.now + 3 >= resource["due_date"]
           forbidden_labels:
             - "deadline:hard"
             - "deadline:miss"
@@ -106,7 +108,8 @@ resource_rules:
             Global ping for all! {{author}} {{assignees}}
       - name: Sadly comment missed deadlines
         conditions:
-          ruby: DateTime.now >= resource["due_date"]
+          ruby: |
+            resource["due_date"] and DateTime.now >= resource["due_date"]
           forbidden_labels:
             - "deadline:miss"
           state: opened
