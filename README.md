@@ -46,13 +46,8 @@ To setup a new Heroku server you will need to:
 2. Setup all env vars with tokens and ids
 3. Enjoy!
 
-Use this command to run inside a scheduler:
+Use `worker` process type to run inside a scheduler every 10 minutes.
 
-```bash
-bundle exec gitlab-triage \
-  --source="$KIRA_STALE_SOURCE" --source-id="$KIRA_STALE_SOURCE_ID" \
-  --token="$KIRA_GITLAB_PERSONAL_TOKEN" --host-url="$GITLAB_URL"
-```
 
 ### GitLab CI setup
 

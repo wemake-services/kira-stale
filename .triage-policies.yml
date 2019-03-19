@@ -117,7 +117,7 @@ resource_rules:
             - "deadline:hard"
             - "deadline:soft"
           comment: |
-            The deadline was missed. Shame on you, architect.
+            The deadline was missed.
             This incident will be reported to the stakeholders.
             Status of this task needs to be discussed further.
             Most likely, it still makes sence to finish it,
