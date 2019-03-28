@@ -144,6 +144,7 @@ resource_rules:
             - "validation:stale"
           comment: |
             Looks like this merge request is stale.
+            It was last updated at: {{resource["updated_at"]}}
             Why no one is working on it?
 
             How can this be resolved?
@@ -155,5 +156,5 @@ resource_rules:
             3. In case you cannot recieve a single review
                for more than two hours, ping your architect
             4. Merge it if possible.
-               Assign our merge bot to it if that's the case
+               Assign our merge bot (@kira\-bot) to this MR if that's the case
             5. Close it in case it was created by a mistake
