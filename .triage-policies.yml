@@ -144,7 +144,9 @@ resource_rules:
             - "validation:stale"
           comment: |
             Looks like this merge request is stale.
-            It was last updated at: {{updated_at}}
+            It was last updated at {{updated_at}}
+            Now is %"#{Datetime.now}"
+
             Why no one is working on it?
 
             How can this be resolved?
