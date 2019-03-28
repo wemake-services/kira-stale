@@ -145,7 +145,7 @@ resource_rules:
           comment: |
             Looks like this merge request is stale.
             It was last updated at {{updated_at}}
-            Now is %"#{Datetime.now}"
+            Now is %"#{DateTime.now}"
 
             Why no one is working on it?
 
