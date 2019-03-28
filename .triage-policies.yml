@@ -134,8 +134,9 @@ resource_rules:
       - name: Comment stale merge requests
         conditions:
           ruby: |
-            DateTime.now + (1.0 / 24) >= resource["updated_at"] and
-              not resource["work_in_progress"]
+            DateTime.now >= DateTime.parse(
+              resource["updated_at"]
+            ) + (1.0 / 24) and not resource["work_in_progress"]
           state: opened
           forbidden_labels:
             - "validation:stale"
@@ -145,7 +146,6 @@ resource_rules:
           comment: |
             Looks like this merge request is stale.
             It was last updated at {{updated_at}}
-            Now is %"#{DateTime.now}"
 
             Why no one is working on it?
 
