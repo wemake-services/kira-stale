@@ -36,6 +36,7 @@ You will need to create this set of labels:
 - `deadline:missed`
 - `validation:labels`
 - `validation:stale`
+- `validation:invalid`
 - `notification:first`
 - `notification:last`
 

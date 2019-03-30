@@ -52,13 +52,18 @@ resource_rules:
           remove_labels:
             - "validation:stale"
           comment: |
-            Closed as stale.
+            Closed as stale. Create a new issue in case you will need this.
+            /unassign
+            /remove_milestone
+            /remove_estimate
+            /remove_due_date
+            /clear_weight
+            /lock
 
       # Validation:
 
       - name: Validate that all issues have labels
         conditions:
-          ruby: DateTime.now >= resource["created_at"]
           labels:
             - No label
           state: opened
@@ -126,10 +131,36 @@ resource_rules:
             Most likely, it still makes sence to finish it,
             but it might be already useless.
 
+      # Invalid issues:
+
+      - name: Close invalid issues
+        conditions:
+          state: opened
+          labels:
+            - validation:invalid
+        actions:
+          status: close
+          comment: |
+            Hey, looks like your issue is invalid.
+
+            Please, make sure that your know
+            [how to work with issues](https://wemake.services/meta/rsdp/creating-issues/).
+
+            Create a new one if you have something to report / suggest.
+
+            In case you have any questions, please ask them in a new issue.
+            Label it as ~"documentation" and assign your architect.
+            /unassign
+            /remove_milestone
+            /remove_estimate
+            /remove_due_date
+            /clear_weight
+            /lock
+
   merge_requests:
     rules:
 
-      # Long code reviews
+      # Long code reviews:
 
       - name: Comment stale merge requests
         conditions:
@@ -160,3 +191,26 @@ resource_rules:
             4. Merge it if possible.
                Assign our merge bot (@kira\-bot) to this MR if that's the case
             5. Close it in case it was created by a mistake
+
+      # Invalid merge requests:
+
+      - name: Close invalid merge requests
+        conditions:
+          state: opened
+          labels:
+            - validation:invalid
+        actions:
+          status: close
+          comment: |
+            Hey, looks like your merge request is invalid.
+
+            Please, make sure that your know
+            [how to work with merge requests](https://wemake.services/meta/rsdp/creating-merge-requests/).
+
+            Create a new one if you have something to submit.
+
+            In case you have any questions, please ask them in a new issue.
+            Label it as ~"documentation" and assign your architect.
+            /unassign
+            /remove_milestone
+            /lock
