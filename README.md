@@ -33,12 +33,14 @@ It is possible to use this setup with `.gitlab-ci.yml` and Heroku.
 You will need to create this set of labels:
 - `deadline:soft`
 - `deadline:hard`
-- `deadline:missed`
+- `deadline:miss`
 - `validation:labels`
 - `validation:stale`
 - `validation:invalid`
 - `notification:first`
 - `notification:last`
+
+You can use [`kira-setup`](https://github.com/wemake-services/kira-setup) to create these labels for you.
 
 ### Heroku setup
 
