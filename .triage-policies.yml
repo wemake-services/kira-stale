@@ -160,7 +160,7 @@ resource_rules:
   merge_requests:
     rules:
 
-      # Long code reviews:
+      # Long merge requests and code reviews:
 
       - name: Comment stale merge requests
         conditions:
@@ -188,9 +188,20 @@ resource_rules:
                if there's one and it is a right time for that {{assignee}}
             3. In case you cannot recieve a single review
                for more than two hours, ping your architect
-            4. Merge it if possible.
-               Assign our merge bot (@kira\-bot) to this MR if that's the case
-            5. Close it in case it was created by a mistake
+            4. Merge it if possible. Make sure to rebase it.
+               Or assign our merge bot (@kira\-bot) to rebase / merge it for you
+            5. Apply ~"validation:invalid" label in case it was created by a mistake
+
+      # Copy metadata from issue to merge request:
+
+      - name: Copy metadata from the original issue
+        conditions:
+          state: opened
+          labels:
+            - No Label
+        actions:
+          comment: |
+            /copy_metadata #{resource["source_branch"][/issue-(\d+)/, 1]}
 
       # Invalid merge requests:
 
