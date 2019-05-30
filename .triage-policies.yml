@@ -185,7 +185,7 @@ resource_rules:
                Use `/wip` command to do that.
                Then remove ~"validation:stale" label
             2. Ping the reviewer to submit a review,
-               if it is a right time for that {{assignee}}
+               if there's one and it is a right time for that {{assignee}}
             3. In case you cannot recieve a single review
                for more than two hours, ping your architect
             4. Merge it if possible.
