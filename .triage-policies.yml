@@ -201,6 +201,8 @@ resource_rules:
             - No Label
         actions:
           comment: |
+            Source branch #{resource["source_branch"]}
+            Regex #{resource["source_branch"][/issue-(\d+)/, 1]}
             /copy_metadata #{resource["source_branch"][/issue-(\d+)/, 1]}
 
       # Invalid merge requests:
