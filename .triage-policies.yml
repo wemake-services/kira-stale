@@ -79,7 +79,7 @@ resource_rules:
             2. Remove ~"validation:labels" label
 
       # Estimates:
-      - name: Label issues with an estimate
+      - name: Label issues without an estimate
         conditions:
           ruby: |
             resource["time_stats"]["time_estimate"] == 0
