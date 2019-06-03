@@ -78,9 +78,25 @@ resource_rules:
             1. Add proper label to it
             2. Remove ~"validation:labels" label
 
+      # Estimates:
+      - name: Label issues with an estimate
+        conditions:
+          ruby: |
+            resource["time_stats"]["time_estimate"] == 0
+          forbidden_labels:
+            - "validation:estimate"
+          state: opened
+        actions:
+          labels:
+            - "validation:estimate"
+          comment: |
+            This issue is not estimated.
+            {{author}}, ping your architect to do it.
+            Then remove ~"validation:estimate" label.
+
       # Deadlines:
 
-      - name: Midly comment deadlines
+      - name: Mildly comment deadlines
         conditions:
           ruby: |
             resource["due_date"] and DateTime.now + 7 >= resource["due_date"]
@@ -93,7 +109,7 @@ resource_rules:
           labels:
             - "deadline:soft"
           comment: |
-            The issue's deadline is comming. Better resolve it.
+            The issue's deadline is coming. Better resolve it.
             CC {{author}} {{assignees}}
       - name: Strongly comment deadlines
         conditions:
@@ -128,7 +144,7 @@ resource_rules:
             The deadline was missed.
             This incident will be reported to the stakeholders.
             Status of this task needs to be discussed further.
-            Most likely, it still makes sence to finish it,
+            Most likely, it still makes sense to finish it,
             but it might be already useless.
 
       # Invalid issues:
@@ -167,7 +183,7 @@ resource_rules:
           ruby: |
             DateTime.now >= DateTime.parse(
               resource["updated_at"]
-            ) + (1.0 / 24) and not resource["work_in_progress"]
+            ) + (3.0 / 24) and not resource["work_in_progress"]
           state: opened
           forbidden_labels:
             - "validation:stale"
@@ -186,7 +202,7 @@ resource_rules:
                Then remove ~"validation:stale" label
             2. Ping the reviewer to submit a review,
                if there's one and it is a right time for that {{assignee}}
-            3. In case you cannot recieve a single review
+            3. In case you cannot receive a single review
                for more than two hours, ping your architect
             4. Merge it if possible. Make sure to rebase it.
                Or assign our merge bot (@kira\-bot) to rebase / merge it for you
