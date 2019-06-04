@@ -79,6 +79,7 @@ resource_rules:
             2. Remove ~"validation:labels" label
 
       # Estimates:
+
       - name: Label issues without an estimate
         conditions:
           ruby: |
@@ -93,6 +94,17 @@ resource_rules:
             This issue is not estimated.
             {{author}}, ping your architect to do it.
             Then remove ~"validation:estimate" label.
+
+      - name: Unlabel issues with an estimate
+        conditions:
+          ruby: |
+            resource["time_stats"]["time_estimate"] != 0
+          labels:
+            - "validation:estimate"
+          state: opened
+        actions:
+          remove_labels:
+            - "validation:estimate"
 
       # Deadlines:
 
