@@ -93,7 +93,8 @@ resource_rules:
           comment: |
             This issue is not estimated.
             {{author}}, ping your architect to do it.
-            Then remove ~"validation:estimate" label.
+            Then label ~"validation:estimate"
+            will be removed automatically for you.
 
       - name: Unlabel issues with an estimate
         conditions:
