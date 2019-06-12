@@ -77,6 +77,17 @@ resource_rules:
             Steps to clarify it.
             1. Add proper label to it
             2. Remove ~"validation:labels" label
+      - name: Validate that all issues have description
+        conditions:
+          state: opened
+          ruby: |
+            not resource["description"] or resource["description"] == ""
+        actions:
+          labels:
+            - "validation:invalid"
+          comment: |
+            This issue is invalid, since it does not have any description.
+            Open a new one.
 
       # Estimates:
 
@@ -95,7 +106,6 @@ resource_rules:
             {{author}}, ping your architect to do it.
             Then label ~"validation:estimate"
             will be removed automatically for you.
-
       - name: Unlabel issues with an estimate
         conditions:
           ruby: |
