@@ -6,8 +6,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    concurrent-ruby (1.1.5)
-    gitlab-triage (1.6.0)
+    concurrent-ruby (1.1.6)
+    gitlab-triage (1.6.1)
       activesupport (~> 5.1)
       httparty (~> 0.17)
     httparty (0.17.3)
@@ -28,7 +28,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gitlab-triage (~> 1.6.0)
+  gitlab-triage (~> 1.6.1)
 
 BUNDLED WITH
    2.0.1
