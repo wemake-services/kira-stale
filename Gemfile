@@ -2,4 +2,4 @@ source 'https://rubygems.org'
 
 ruby '2.4.5'
 
-gem "gitlab-triage", "~> 1.9.0"
+gem "gitlab-triage", "~> 1.10.0"
