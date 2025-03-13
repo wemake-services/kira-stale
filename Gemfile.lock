@@ -14,7 +14,7 @@ GEM
       httparty (~> 0.17)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    graphql (1.12.13)
+    graphql (1.12.25)
     graphql-client (0.16.0)
       activesupport (>= 3.0)
       graphql (~> 1.8)
