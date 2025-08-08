@@ -4,7 +4,7 @@
 [![kira-family](https://img.shields.io/badge/kira-family-pink.svg)](https://github.com/wemake-services/kira)
 [![test](https://github.com/wemake-services/kira-stale/actions/workflows/test.yml/badge.svg?branch=master&event=push)](https://github.com/wemake-services/kira-stale/actions/workflows/test.yml)
 
-Automate routine work with stale GitLab issues and merge requests.
+Automate routine work with stale GitLab issues, merge requests and branches.
 
 Part of the [`@kira`](https://github.com/wemake-services/kira) bots family.
 

@@ -4,6 +4,21 @@
 # See https://gitlab.com/gitlab-org/gitlab-triage
 
 resource_rules:
+  branches:
+    rules:
+
+      # Delete old branches:
+
+      - name: Delete stale branches
+        conditions:
+          date:
+            attribute: committed_date
+            condition: older_than
+            interval_type: months
+            interval: 1
+        actions:
+          delete: true
+
   issues:
     rules:
 
