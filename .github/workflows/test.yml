@@ -21,7 +21,7 @@ jobs:
       run: |
         docker run \
           wemake-services/kira-stale \
-          gitlab-triage --dry-run
+          gitlab-triage --help
 
   deploy:
     if: "github.event_name == 'push' && github.repository == 'wemake-services/kira-stale'"
