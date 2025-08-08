@@ -124,13 +124,13 @@ resource_rules:
           ruby: |
             resource["due_date"] and DateTime.now + 7 >= resource["due_date"]
           forbidden_labels:
-            - "deadline:soft"
-            - "deadline:hard"
-            - "deadline:miss"
+            - "deadline::soft"
+            - "deadline::hard"
+            - "deadline::miss"
           state: opened
         actions:
           labels:
-            - "deadline:soft"
+            - "deadline::soft"
           comment: |
             The issue's deadline is coming. Better resolve it.
             CC {{author}} {{assignees}}
@@ -139,14 +139,14 @@ resource_rules:
           ruby: |
             resource["due_date"] and DateTime.now + 3 >= resource["due_date"]
           forbidden_labels:
-            - "deadline:hard"
-            - "deadline:miss"
+            - "deadline::hard"
+            - "deadline::miss"
           state: opened
         actions:
           labels:
-            - "deadline:hard"
+            - "deadline::hard"
           remove_labels:
-            - "deadline:soft"
+            - "deadline::soft"
           comment: |
             This issue is now on fire! :fire: Quick actions are required.
             Global ping for all! {{author}} {{assignees}}
@@ -155,14 +155,14 @@ resource_rules:
           ruby: |
             resource["due_date"] and DateTime.now >= resource["due_date"]
           forbidden_labels:
-            - "deadline:miss"
+            - "deadline::miss"
           state: opened
         actions:
           labels:
-            - "deadline:miss"
+            - "deadline::miss"
           remove_labels:
-            - "deadline:hard"
-            - "deadline:soft"
+            - "deadline::hard"
+            - "deadline::soft"
           comment: |
             The deadline was missed.
             This incident will be reported to the stakeholders.
