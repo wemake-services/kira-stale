@@ -1,40 +1,65 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (5.2.6)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 0.7, < 2)
-      minitest (~> 5.1)
-      tzinfo (~> 1.1)
-    concurrent-ruby (1.1.9)
-    gitlab-triage (1.20.0)
-      activesupport (~> 5.1)
-      globalid (~> 0.4)
+    activesupport (8.0.2)
+      base64
+      benchmark (>= 0.3)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.3.1)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      logger (>= 1.4.2)
+      minitest (>= 5.1)
+      securerandom (>= 0.3)
+      tzinfo (~> 2.0, >= 2.0.5)
+      uri (>= 0.13.1)
+    base64 (0.3.0)
+    benchmark (0.4.1)
+    bigdecimal (3.2.2)
+    concurrent-ruby (1.3.5)
+    connection_pool (2.5.3)
+    drb (2.2.3)
+    gitlab-triage (1.44.5)
+      activesupport (>= 5.1)
+      globalid (~> 1.0, >= 1.0.1)
+      graphql (< 2.1.0)
       graphql-client (~> 0.16)
-      httparty (~> 0.17)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
-    graphql (1.12.25)
-    graphql-client (0.16.0)
+      httparty (~> 0.20.0)
+    globalid (1.2.1)
+      activesupport (>= 6.1)
+    graphql (2.0.32)
+      base64
+    graphql-client (0.26.0)
       activesupport (>= 3.0)
-      graphql (~> 1.8)
-    httparty (0.21.0)
-      mini_mime (>= 1.0.0)
+      graphql (>= 1.13.0)
+    httparty (0.20.0)
+      mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
-    i18n (1.8.10)
+    i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    mini_mime (1.1.2)
-    minitest (5.14.4)
-    multi_xml (0.6.0)
-    thread_safe (0.3.6)
-    tzinfo (1.2.10)
-      thread_safe (~> 0.1)
+    logger (1.7.0)
+    mime-types (3.7.0)
+      logger
+      mime-types-data (~> 3.2025, >= 3.2025.0507)
+    mime-types-data (3.2025.0805)
+    minitest (5.25.5)
+    multi_xml (0.7.2)
+      bigdecimal (~> 3.1)
+    securerandom (0.4.1)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    uri (1.0.3)
 
 PLATFORMS
+  arm64-darwin-23
   ruby
 
 DEPENDENCIES
-  gitlab-triage (~> 1.20.0)
+  gitlab-triage (~> 1.44.5)
+
+RUBY VERSION
+   ruby 3.4.5p51
 
 BUNDLED WITH
-   2.0.1
+   2.6.9
