@@ -19,6 +19,7 @@ GEM
     bigdecimal (3.2.2)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.3)
+    csv (3.3.5)
     drb (2.2.3)
     gitlab-triage (1.44.5)
       activesupport (>= 5.1)
@@ -46,6 +47,7 @@ GEM
     minitest (5.25.5)
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
+    racc (1.4.16)
     securerandom (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -56,7 +58,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  csv (~> 3.3.5)
   gitlab-triage (~> 1.44.5)
+  racc (~> 1.4.14)
 
 RUBY VERSION
    ruby 3.4.5p51
