@@ -5,6 +5,7 @@ RUN apt-get update && apt-get upgrade -y \
     build-essential \
     libz-dev \
   # Cleaning cache:
+  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /stale
@@ -13,4 +14,4 @@ RUN bundle install
 
 COPY .triage-policies.yml /stale/
 
-ENTRYPOINT ['bundle', 'exec']
+ENTRYPOINT ["bundle", "exec"]
