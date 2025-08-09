@@ -254,7 +254,7 @@ resource_rules:
           labels:
             - "dependencies"
           ruby: |
-            !resource["has_conflicts"] && resource["need_rebase"]
+            !resource["has_conflicts"] && resource["detailed_merge_status"] == "need_rebase"
         actions:
           comment: |
             /rebase
