@@ -80,7 +80,7 @@ resource_rules:
       - name: Validate that all issues have labels
         conditions:
           labels:
-            - No label
+            - None
           state: opened
         actions:
           labels:
@@ -92,6 +92,21 @@ resource_rules:
             Steps to clarify it.
             1. Add proper label to it
             2. Remove ~"validation:labels" label
+      - name: Validate that all issues have at least one label with type
+        conditions:
+          ruby: |
+            !resource["labels"].any? { |label| label.start_with?("type::") }
+        actions:
+          labels:
+            - "validation:labels"
+          comment: |
+            This issue does not have an issue type.
+            Please, clarify it. CC {{author}}
+
+            Steps to clarify it.
+            1. Make sure that you use an issue template
+            2. Add proper `type::` label to it
+            3. Remove ~"validation:labels" label
       - name: Validate that all issues have description
         conditions:
           state: opened
@@ -214,6 +229,21 @@ resource_rules:
   merge_requests:
     rules:
 
+      # Copy metadata from issues to merge requests:
+
+      - name: Copy metadata from the original issue
+        conditions:
+          state: opened
+          forbidden_labels:
+            - "mr::processed"
+          ruby: |
+            closes_issues.size > 0
+        actions:
+          labels:
+            - "mr::processed"
+          comment: |
+            /copy_metadata ##{closes_issues[0].resource["iid"]}
+
       # Long merge requests and code reviews:
 
       - name: Comment stale merge requests
@@ -245,17 +275,6 @@ resource_rules:
             4. Merge it if possible. Make sure to rebase it.
                Or assign our merge bot (@kira\-bot) to rebase / merge it for you
             5. Apply ~"validation:invalid" label in case it was created by a mistake
-
-      # Copy metadata from issue to merge request:
-
-      - name: Copy metadata from the original issue
-        conditions:
-          state: opened
-          labels:
-            - No Label
-        actions:
-          comment: |
-            /copy_metadata ##{resource["source_branch"][/issue-(\d+)/, 1]}
 
       # Invalid merge requests:
 

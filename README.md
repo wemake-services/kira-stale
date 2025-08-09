@@ -37,6 +37,7 @@ You will need to create this set of labels:
 - `validation:stale`
 - `validation:estimate`
 - `validation:invalid`
+- `mr::processed`
 
 You can use [`kira-setup`](https://github.com/wemake-services/kira-setup) to create these labels for you.
 
