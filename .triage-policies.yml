@@ -259,6 +259,35 @@ resource_rules:
           comment: |
             /rebase
 
+      # Comment on merge requests without time tracking:
+
+      - name: Label merge requests without a spent time
+        conditions:
+          ruby: |
+            resource["time_stats"]["total_time_spent"] == 0
+          forbidden_labels:
+            - "validation:estimate"
+          state: opened
+        actions:
+          labels:
+            - "validation:estimate"
+          comment: |
+            This merge request does not have spent time.
+            {{author}}, use `/spend` [command](https://docs.gitlab.com/user/project/quick_actions).
+            Then label ~"validation:estimate"
+            will be removed automatically for you.
+
+      - name: Unlabel merge requests with time spent
+        conditions:
+          ruby: |
+            resource["time_stats"]["total_time_spent"] != 0
+          labels:
+            - "validation:estimate"
+          state: opened
+        actions:
+          remove_labels:
+            - "validation:estimate"
+          
       # Long merge requests and code reviews:
 
       - name: Comment stale merge requests
