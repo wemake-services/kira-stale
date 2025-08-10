@@ -246,19 +246,6 @@ resource_rules:
           comment: |
             /copy_metadata ##{closes_issues[0].resource["iid"]}
 
-      # Rebase and merge dependenices:
-
-      - name: Rebase dependencies
-        conditions:
-          state: opened
-          labels:
-            - "dependencies"
-          ruby: |
-            !resource["has_conflicts"] && resource["detailed_merge_status"] == "need_rebase"
-        actions:
-          comment: |
-            /rebase
-
       # Comment on merge requests without time tracking:
 
       - name: Label merge requests without a spent time
@@ -287,7 +274,7 @@ resource_rules:
         actions:
           remove_labels:
             - "validation:estimate"
-          
+
       # Long merge requests and code reviews:
 
       - name: Comment stale merge requests
