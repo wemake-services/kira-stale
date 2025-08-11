@@ -44,9 +44,9 @@ You can use [`kira-setup`](https://github.com/wemake-services/kira-setup) to cre
 We ship a `docker` image that can be used as:
 
 ```bash
-docker pull wemake-services/kira-stale:latest
+docker pull wemakeservices/kira-stale:latest
 
-docker run --rm wemake-services/kira-stale \
+docker run --rm wemakeservices/kira-stale \
   gitlab-triage \
   --source-id="your-gitlab-project-int-id" \
   --token="your-gitlab-token-with-api-perm"
