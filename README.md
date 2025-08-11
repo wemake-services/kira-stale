@@ -19,6 +19,12 @@ Policy:
 
 ## Installation
 
+Primary method is via [`docker`](https://hub.docker.com/r/wemakeservices/kira-stale):
+
+```bash
+docker pull wemakeservices/kira-stale
+```
+
 We use [`gitlab-triage`](https://gitlab.com/gitlab-org/ruby/gems/gitlab-triage) inside.
 So, consult [their docs](https://gitlab.com/gitlab-org/gitlab-triage)
 about deployment and usage.

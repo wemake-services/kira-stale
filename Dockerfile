@@ -8,12 +8,11 @@ RUN apt-get update && apt-get upgrade -y \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
+# Deps:
 WORKDIR /stale
 COPY ./Gemfile ./Gemfile.lock /stale/
 RUN bundle install
 
-# Description:
-COPY README.md /stale/
 # Project files:
 COPY .triage-policies.yml /stale/
 
