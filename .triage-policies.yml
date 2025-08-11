@@ -75,23 +75,8 @@ resource_rules:
             /clear_weight
             /lock
 
-      # Validation:
+      # Issue labels:
 
-      - name: Validate that all issues have labels
-        conditions:
-          labels:
-            - None
-          state: opened
-        actions:
-          labels:
-            - "validation:labels"
-          comment: |
-            This issue is unlabeled.
-            Please, clarify it. CC {{author}}
-
-            Steps to clarify it.
-            1. Add proper label to it
-            2. Remove ~"validation:labels" label
       - name: Validate that all issues have at least one label with type
         conditions:
           forbidden_labels:
@@ -106,9 +91,21 @@ resource_rules:
             Please, clarify it. CC {{author}}
 
             Steps to clarify it.
-            1. Make sure that you use an issue template
-            2. Add proper `type::` label to it
-            3. Remove ~"validation:labels" label
+            1. Add proper `type::` label to this issue
+            2. Make sure that you use an [issue template](/.gitlab/issue_templates) in the future
+            3. Label ~"validation::labels" will be removed automatically
+      - name: Remove validation label when at least one label exist
+        conditions:
+          labels:
+            - "validation:labels"
+          ruby: |
+            resource["labels"].any? { |label| label.start_with?("type::") }
+        actions:
+          remove_labels:
+            - "validation:labels"
+
+      # Invalid issues:
+
       - name: Validate that all issues have description
         conditions:
           state: opened
