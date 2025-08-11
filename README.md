@@ -25,8 +25,6 @@ about deployment and usage.
 
 You can even have a look at [GitLab's internal policies](https://gitlab.com/gitlab-org/quality/triage-ops/blob/master/policies).
 
-It is possible to use this setup with `.gitlab-ci.yml` and Heroku.
-
 ### Labels setup
 
 You will need to create this set of labels:
