@@ -19,7 +19,7 @@ Policy:
 
 ## Installation
 
-We use `gitlab-triage` inside.
+We use [`gitlab-triage`](https://gitlab.com/gitlab-org/ruby/gems/gitlab-triage) inside.
 So, consult [their docs](https://gitlab.com/gitlab-org/gitlab-triage)
 about deployment and usage.
 
@@ -41,19 +41,20 @@ You will need to create this set of labels:
 
 You can use [`kira-setup`](https://github.com/wemake-services/kira-setup) to create these labels for you.
 
-### Heroku setup
+### Using `docker`
 
-To setup a new Heroku server you will need to:
-1. Setup a [scheduler](https://elements.heroku.com/addons/scheduler)
-2. Setup all env vars with tokens and ids
-3. Enjoy!
+We ship a `docker` image that can be used as:
 
-Use `worker` process type to run inside a scheduler every 10 minutes.
-Make sure to fill all env vars with the correct values.
+```bash
+docker pull wemake-services/kira-stale:latest
+
+docker run --rm wemake-services/kira-stale \
+  gitlab-triage \
+  --source-id="your-gitlab-project-int-id" \
+  --token="your-gitlab-token-with-api-perm"
+```
 
 
-### GitLab CI setup
+## License
 
-You can generate `.gitlab-ci.yml` file to run this script as scheduled events:
-1. Use `--init-ci` to generate default `.gitlab-ci.yml` file
-2. Enable [scheduled builds in CI](https://docs.gitlab.com/ee/user/project/pipelines/schedules.html)
+[MIT](./LICENSE)

@@ -12,6 +12,9 @@ WORKDIR /stale
 COPY ./Gemfile ./Gemfile.lock /stale/
 RUN bundle install
 
+# Description:
+COPY README.md /stale/
+# Project files:
 COPY .triage-policies.yml /stale/
 
 ENTRYPOINT ["bundle", "exec"]
