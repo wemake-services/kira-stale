@@ -278,9 +278,9 @@ resource_rules:
       - name: Comment stale merge requests
         conditions:
           ruby: |
-            DateTime.now >= DateTime.parse(
+            DateTime.now >= (DateTime.parse(
               resource["updated_at"]
-            ) + (7.0 / 24) and not resource["work_in_progress"]
+            ) + 3.0) and not resource["work_in_progress"]
           state: opened
           forbidden_labels:
             - "validation:stale"
