@@ -126,6 +126,7 @@ resource_rules:
             resource["time_stats"]["time_estimate"] == 0
           forbidden_labels:
             - "validation:estimate"
+            - "dependencies"
           state: opened
         actions:
           labels:
@@ -283,6 +284,7 @@ resource_rules:
           state: opened
           forbidden_labels:
             - "validation:stale"
+            - "dependencies"
         actions:
           labels:
             - "validation:stale"
