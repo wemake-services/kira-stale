@@ -280,7 +280,7 @@ resource_rules:
           ruby: |
             DateTime.now >= DateTime.parse(
               resource["updated_at"]
-            ) + (3.0 / 24) and not resource["work_in_progress"]
+            ) + (7.0 / 24) and not resource["work_in_progress"]
           state: opened
           forbidden_labels:
             - "validation:stale"
