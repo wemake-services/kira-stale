@@ -136,6 +136,7 @@ resource_rules:
             resource["time_stats"]["time_estimate"] == 0
           forbidden_labels:
             - "validation:estimate"
+            - "dependencies"
           state: opened
         actions:
           labels:
@@ -287,12 +288,13 @@ resource_rules:
       - name: Comment stale merge requests
         conditions:
           ruby: |
-            DateTime.now >= DateTime.parse(
+            DateTime.now >= (DateTime.parse(
               resource["updated_at"]
-            ) + (3.0 / 24) and not resource["work_in_progress"]
+            ) + 3.0) and not resource["work_in_progress"]
           state: opened
           forbidden_labels:
             - "validation:stale"
+            - "dependencies"
         actions:
           labels:
             - "validation:stale"
