@@ -87,6 +87,7 @@ resource_rules:
             - "validation:labels"
           ruby: |
             !resource["labels"].any? { |label| label.start_with?("type::") } ||
+            !(resource["labels"].any? { |label| label.start_with?("deadline::") } && !resource["due_date"]) ||
             !(resource["labels"].map {
               |tag| tag.split("::", 2).first if tag.include?("::")
             }.compact.group_by(&:itself).select { |_, v| v.size > 1 }.keys).empty?
@@ -100,8 +101,9 @@ resource_rules:
             Steps to clarify it.
             1. Add one `type::*` label to this issue, add others if applicable
             2. Make sure that there are no conflicting namespaced issues (which has `::` suffix)
-            3. Make sure that you use an [issue template](/.gitlab/issue_templates) in the future
-            4. Label ~"validation:labels" will be removed automatically once all problems are fixed
+            3. Make sure if `deadline::` labels are used, the deadline value must be set
+            4. Make sure that you use an [issue template](/.gitlab/issue_templates) in the future
+            5. Label ~"validation:labels" will be removed automatically once all problems are fixed
       - name: Remove `validation:labels` from valid issues
         conditions:
           state: opened
@@ -109,6 +111,7 @@ resource_rules:
             - "validation:labels"
           ruby: |
             resource["labels"].any? { |label| label.start_with?("type::") } &&
+            (resource["labels"].any? { |label| label.start_with?("deadline::") } && resource["due_date"]) &&
             (resource["labels"].map {
               |tag| tag.split("::", 2).first if tag.include?("::")
             }.compact.group_by(&:itself).select { |_, v| v.size > 1 }.keys).empty?
