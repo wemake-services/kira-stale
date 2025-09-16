@@ -87,7 +87,7 @@ resource_rules:
             - "validation:labels"
           ruby: |
             !resource["labels"].any? { |label| label.start_with?("type::") } ||
-            !(resource["labels"].any? { |label| label.start_with?("deadline::") } && !resource["due_date"]) ||
+            !(resource["labels"].any? { |label| label.start_with?("deadline::") } ? !resource["due_date"] : true) ||
             !(resource["labels"].map {
               |tag| tag.split("::", 2).first if tag.include?("::")
             }.compact.group_by(&:itself).select { |_, v| v.size > 1 }.keys).empty?
@@ -95,7 +95,7 @@ resource_rules:
           labels:
             - "validation:labels"
           comment: |
-            This issue does not have an issue type or have conflicting namespaced issues (`::`).
+            This issue has invalid labels.
             Please, clarify it. CC {{author}}
 
             Steps to clarify it.
@@ -111,7 +111,7 @@ resource_rules:
             - "validation:labels"
           ruby: |
             resource["labels"].any? { |label| label.start_with?("type::") } &&
-            (resource["labels"].any? { |label| label.start_with?("deadline::") } && resource["due_date"]) &&
+            (resource["labels"].any? { |label| label.start_with?("deadline::") } ? !!resource["due_date"] : true) &&
             (resource["labels"].map {
               |tag| tag.split("::", 2).first if tag.include?("::")
             }.compact.group_by(&:itself).select { |_, v| v.size > 1 }.keys).empty?
