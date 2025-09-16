@@ -251,6 +251,7 @@ resource_rules:
           state: opened
           forbidden_labels:
             - "mr::processed"
+            - "dependencies"
           ruby: |
             closes_issues.size > 0
         actions:
@@ -267,6 +268,7 @@ resource_rules:
             resource["time_stats"]["total_time_spent"] == 0
           forbidden_labels:
             - "validation:estimate"
+            - "dependencies"
           state: opened
         actions:
           labels:
