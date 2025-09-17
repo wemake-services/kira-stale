@@ -17,6 +17,7 @@ resource_rules:
             condition: older_than
             interval_type: months
             interval: 1
+          state: merged
         actions:
           delete: true
 
@@ -87,7 +88,7 @@ resource_rules:
             - "validation:labels"
           ruby: |
             !resource["labels"].any? { |label| label.start_with?("type::") } ||
-            !(resource["labels"].any? { |label| label.start_with?("deadline::") } ? !resource["due_date"] : true) ||
+            (resource["labels"].any? { |label| label.start_with?("deadline::") } ? !resource["due_date"] : false) ||
             !(resource["labels"].map {
               |tag| tag.split("::", 2).first if tag.include?("::")
             }.compact.group_by(&:itself).select { |_, v| v.size > 1 }.keys).empty?
