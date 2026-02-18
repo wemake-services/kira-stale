@@ -18,6 +18,7 @@ resource_rules:
             interval_type: months
             interval: 1
           state: merged
+          protected: false
         actions:
           delete: true
 
