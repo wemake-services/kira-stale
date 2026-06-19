@@ -8,14 +8,13 @@ Automate routine work with stale GitLab issues, merge requests and branches.
 
 Part of the [`@kira`](https://github.com/wemake-services/kira) bots family.
 
-
 ## Adding new actions
 
 Policy:
+
 1. All actions must be idempotent: multiple runs – the same state
 2. All actions must make sense for all projects
 3. Dry run your script several times with `--dry-run` flag to make sure it works
-
 
 ## Installation
 
@@ -34,13 +33,14 @@ You can even have a look at [GitLab's internal policies](https://gitlab.com/gitl
 ### Labels setup
 
 You will need to create this set of labels:
+
 - `deadline::soft`
 - `deadline::hard`
 - `deadline::miss`
-- `validation:labels`
-- `validation:stale`
-- `validation:estimate`
-- `validation:invalid`
+- `validation::labels`
+- `validation::stale`
+- `validation::estimate`
+- `validation::invalid`
 - `mr::processed`
 
 You can use [`kira-setup`](https://github.com/wemake-services/kira-setup) to create these labels for you.
@@ -57,7 +57,6 @@ docker run --rm wemakeservices/kira-stale \
   --source-id="your-gitlab-project-int-id" \
   --token="your-gitlab-token-with-api-perm"
 ```
-
 
 ## License
 
