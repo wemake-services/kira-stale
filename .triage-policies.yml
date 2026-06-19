@@ -314,8 +314,8 @@ resource_rules:
             Why no one is working on it?
 
             How can this be resolved?
-            1. {{author}}, mark it a WIP if it has "Work in Progress" state.
-               Use `/wip` command to do that.
+            1. {{author}}, mark it a draft if it has "Work in Progress" state.
+               Use `/draft` command to do that.
                Then remove ~"validation:stale" label
             2. Ping the reviewer to submit a review,
                if there's one and it is a right time for that {{assignee}}
