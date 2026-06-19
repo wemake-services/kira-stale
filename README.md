@@ -60,7 +60,7 @@ docker run --rm wemakeservices/kira-stale \
 ```
 
 Advanced deployment and scheduling options come from
-[`gitlab-triage` docs](https://gitlab.com/gitlab-org/gitlab-triage).
+[`gitlab-triage` docs](https://gitlab.com/gitlab-org/ruby/gems/gitlab-triage).
 GitLab's own
 [triage policies](https://gitlab.com/gitlab-org/quality/triage-ops/blob/master/policies)
 are also a useful reference.
@@ -78,7 +78,7 @@ The bundled policy expects these labels to exist:
 - `validation:invalid`
 - `mr::processed`
 
-Unlike `deadline::*` and `mr::*`, the `validation:*` group intentionally uses
+> Unlike `deadline::*` and `mr::*`, the `validation:*` group intentionally uses
 one `:` instead of GitLab scoped labels. Several validation labels can be
 present on the same issue or merge request at the same time.
 
