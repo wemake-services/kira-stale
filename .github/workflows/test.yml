@@ -47,7 +47,7 @@ jobs:
           flavor: latest=true
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.2.0
         with:
           context: .
           push: true
