@@ -20,7 +20,7 @@ GEM
     connection_pool (3.0.2)
     csv (3.3.6)
     drb (2.2.3)
-    gitlab-triage (1.55.1)
+    gitlab-triage (1.56.0)
       activesupport (>= 5.1)
       globalid (~> 1.0, >= 1.0.1)
       graphql (< 2.1.0)
@@ -52,7 +52,7 @@ GEM
     securerandom (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (1.1.1)
+    uri (1.1.2)
 
 PLATFORMS
   arm64-darwin-23
@@ -60,7 +60,7 @@ PLATFORMS
 
 DEPENDENCIES
   csv (~> 3.3.6)
-  gitlab-triage (~> 1.55.1)
+  gitlab-triage (~> 1.56.0)
   racc (~> 1.8.1)
 
 RUBY VERSION
