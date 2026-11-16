@@ -1,4 +1,4 @@
-FROM ruby:4.0.8-slim
+FROM ruby:4.0.9-slim
 
 RUN apt-get update && apt-get upgrade -y \
   && apt-get install --no-install-recommends -y \
